@@ -26,7 +26,7 @@ function Home() {
 
 
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ setLoginData({ email: "", password: "" });
 
 
     try {
-      const res = await fetch("http://localhost:5000/signup", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -526,7 +526,7 @@ setLoginData({ email: "", password: "" });
   if (!user) return alert("Login first");
 
   try {
-    const res = await fetch(`http://localhost:5000/cart/${user._id}`);
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/cart/${user._id}`);
     const data = await res.json();
 
     if (!res.ok) {
@@ -557,12 +557,12 @@ setLoginData({ email: "", password: "" });
 
   const removeFromCartDB = async (id) => {
   try {
-    await fetch(`http://localhost:5000/cart/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/cart/${id}`, {
       method: "DELETE",
     });
 
     // reload cart from DB
-    const res = await fetch("http://localhost:5000/cart");
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/cart`);
     const data = await res.json();
     setCart(data);
 
@@ -573,7 +573,7 @@ setLoginData({ email: "", password: "" });
 
 const handleLogout = async () => {
   try {
-    await fetch("http://localhost:5000/logout", {
+    await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
       method: "POST",
     });
 
@@ -1042,7 +1042,7 @@ const handleLogout = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) return alert("Login first");
 
-  const res = await fetch("http://localhost:5000/cart/add", {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -1077,7 +1077,7 @@ const handleLogout = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) return alert("Login first");
 
-  const res = await fetch("http://localhost:5000/wishlist/add", {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
